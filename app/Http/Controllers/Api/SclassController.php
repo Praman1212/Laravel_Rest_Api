@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SclassController extends Controller
 {
@@ -14,7 +15,8 @@ class SclassController extends Controller
      */
     public function index()
     {
-        //
+        $sclass = DB::table('sclasses')->get();
+        return response()->json($sclass);
     }
 
     /**
@@ -22,10 +24,7 @@ class SclassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +34,14 @@ class SclassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'class_name' => 'required|unique:sclasses|max:25'
+
+        ]);
+        $data = array();
+        $data['class_name'] = $request->class_name;
+        $insert = DB::table('sclasses')->insert($data);
+        return response('Insert Successfully');
     }
 
     /**
@@ -55,10 +61,7 @@ class SclassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
