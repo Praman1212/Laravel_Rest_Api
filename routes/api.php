@@ -1,3 +1,3 @@
 <?php 
 
-Route::ApiResource('/class','App\Http\Controllers\Api\SclassController');
+Route::ApiResource('/class','App\Http\Controllers\Api\SclassController');  
